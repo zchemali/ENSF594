@@ -37,7 +37,7 @@ public class MoneyChange {
 	
 	public static void main(String[] args) {
 		
-		MoneyChange.minCoins(2826382);
+		MoneyChange.minCoins(999);
 	
 		// TODO Auto-generated method stub
 
