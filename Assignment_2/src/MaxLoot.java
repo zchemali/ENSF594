@@ -1,43 +1,48 @@
- import java.util.ArrayList;
-import java.util.Arrays;
+ import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 //import java.util.stream
-import java.util.stream.IntStream;
 public class MaxLoot {
 	Integer [] valueWeight1,valueWeight2,valueWeight3;
 	HashMap<Integer,Integer[]> input,result;
 	HashMap<Double,Integer> ratio;
 	
+	
 	int elements,maxWeight;
 
-	public MaxLoot() {
-		elements=3;
-		maxWeight=60;
-		valueWeight1=new Integer[2];
-		valueWeight2=new Integer[2];
-		valueWeight3=new Integer[2];
+	public MaxLoot(int elements,int maxWeight) {
+		Scanner scanner =new Scanner(System.in);
 		input=new HashMap<Integer, Integer[]>();
 		ratio=new HashMap<Double, Integer>();
-		valueWeight1[0]=60;
-		valueWeight1[1]=20;
-		input.put(1, valueWeight1);
-		ratio.put( (double) (valueWeight1[0]/valueWeight1[1]),1);
-		valueWeight2[0]=100;
-		valueWeight2[1]=50;
-		input.put(2, valueWeight2);
-		ratio.put( (double) (valueWeight2[0]/valueWeight2[1]),2);
-		valueWeight3[0]=120;
-		valueWeight3[1]=30;
-		input.put(3, valueWeight3);
-		ratio.put( (double) (valueWeight3[0]/valueWeight3[1]),3);
+		this.elements=elements;
+		this.maxWeight=maxWeight;
+		for (int i=0;i<elements;i++) {
+			Integer[] valueWeight=new Integer[2];
+			boolean check =true;
+			while(check) {
+			System.out.println("Enter value for element "+ (i+1));
+			valueWeight[0]=scanner.nextInt();
+			System.out.println("Enter weight for element "+ (i+1));
+			valueWeight[1]=scanner.nextInt();
+			if((valueWeight[0]>=0 && valueWeight[0]<2*Math.pow(10, 6)) && (valueWeight[1]>=0 && valueWeight[1]<2*Math.pow(10, 6)))
+				{input.put((i+1),valueWeight);
+			ratio.put( (double) (valueWeight[0]/valueWeight[1]),(i+1));
+			check=false;}
+				
+			else
+				System.out.println("Enter a valid number");
+			}
+			
+		}
 		
 		result=findCombination(maxWeight,input,ratio);
-		for (int i=1 ;i <result.size();i++) {
-			System.out.println(result.get(i)[1]+" of the element of value "+result.get(i)[0]);
+		
+		for (int i=0 ;i <result.size();i++) {
+			System.out.println(result.get(i+1)[1]+" of the element that has a value of "+result.get(i+1)[0]);
 		}
-		// TODO for loop to keep geting elemnts and their weights
 		
 		
 		
@@ -57,99 +62,43 @@ public class MaxLoot {
 			Double temp =ratioList.get(0);
 			
 			Integer key =ratio.get(temp);
-//			System.out.println(" key is "+key);
 			tempList=input2.get(key);
-//			System.out.println(" Temp lis  insx 0 is  "+tempList[1]);
 			if(maxWeight2>=tempList[1]) {
 				maxWeight2-=tempList[1];
-//				System.out.println("sum before"+ sum);
 				sum+=tempList[0];
 				ratioList.remove(0);
 				result.put(i,tempList);
-				
-//				System.out.println("sum after"+ sum);
-//				System.out.println(ratioList.get(0));
-				
-				
-				
 			}
 			else {
-				
-//				
-				sum+=(tempList[1]-maxWeight2)/(tempList[1])*tempList[0];
-//				System.out.println((tempList[1]-maxWeight2)/(tempList[1])*tempList[0]);
-				tempList[1]=tempList[1]-maxWeight2;
+				sum+=(double)(maxWeight2)/(tempList[1])*tempList[0];
+				System.err.println((double)(maxWeight2)/(tempList[1])*tempList[0]);
+				tempList[1]=maxWeight2;
 				result.put(i, tempList);
 				maxWeight2=0;
 			}
 			
-			
 		}
-		System.out.println(sum);
+		DecimalFormat df =new DecimalFormat(".####");
+		System.out.println("Max Sum is "+df.format(sum));
 		return result;
 	}
 	public static void main(String[] args) {
-		// TODO for loop to keep geting elemnts and their weights
-		new MaxLoot();
-////		MaxLoot loot =new MaxLoot();
-//		loot.elements=3;
-//		loot.maxWeight=10;
-//		
-//		loot.value[0]=500;
-////		loot.value[1]=100;
-////		loot.value[2]=120;
-//		loot.weight[0]=30;
-////		loot.weight[1]=50;
-////		loot.weight[2]=30;
-//		loot.input=n
-//		loot.comboGenerator(loot.w, loot.n, loot.weight);
-		
-//		loot.findCombo(loot.w,loot.value,loot.weight);
-
-	}
-	/**
-	private double[] comboGenerator(int weight,int length,double[] weights) {
-		
-		double[] combo=new double[length];
-		double sum =Arrays.stream(combo).sum();
-		while (sum!=weight) {
-			for (int i =0 ; i<combo.length;i++) {
-				combo[i]=Math.round((Math.random()*weights[i]));
-			}
-			sum =Arrays.stream(combo).sum();
-//			System.out.println(sum);
+		Scanner scanner =new Scanner(System.in);
+		int temp_elements= 0;
+		int temp_weight=0;
+		boolean check=true;
+		while (check) {
+			System.out.println("Enter number of elements between 1 and 10^3");
+			temp_elements=scanner.nextInt();
+			System.out.println("Enter max capacity between 0 and 2.10^6");
+			temp_weight=scanner.nextInt();
+			if((temp_elements>=1 && temp_elements<Math.pow(10, 3)) && (temp_weight>=0 && temp_weight<2*Math.pow(10, 6)) )
+				check=false;
+			else
+			System.out.println("Enter a valid number");
+			
 		}
-		
-//		for (int i =0 ; i<combo.length;i++) {
-//			combo[i]=combo[i]/weights[i];}
-		return combo;
+		new MaxLoot(temp_elements,temp_weight);
 	}
-	
-
-
-	private void findCombo(int weight, double[] values, double[] weights) {
-		
-		double total=0;
-		
-		double [] combos=new double[values.length];
-		int t=6000;
-		while (t>0) {
-			double[] combo=comboGenerator(weight, values.length, weights);
-			double temp=0;
-			for (int i =0 ; i<combo.length;i++) {
-				temp+=combo[i]*values[i]/weights[i];
-			
-		}	
-			
-			if(temp>total) {
-				total=temp;
-				combos=combo;
-				System.out.println(total);
-			}
-			t--;
-		
-	}
-		System.out.println(combos[0]+" combo 2   ");}*/
-
 	
 }
