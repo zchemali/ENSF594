@@ -1,7 +1,16 @@
+
+/**
+ * This class implements the binary search technique
+ */
 import java.util.Scanner;
 
 public class BinarySearch {
-
+	/**
+	 * This method returns the index of key if  found in the array
+	 * @param list passed from main (sorted)
+	 * @param key the number to look for
+	 * @return index of key if found or -1 if wasnt
+	 */
 	public int binarySearch(int[] list,int key) {
 		
 		int mid,low,high;
@@ -29,6 +38,7 @@ public class BinarySearch {
 	public static void main(String[] args) {
 		BinarySearch bs= new BinarySearch();
 		Scanner scanner =new Scanner(System.in);
+		//creating the array
 		System.out.println("Enter size of the sorted list");
 		int n=scanner.nextInt();
 		int[] sortedList=new int[n];
@@ -36,7 +46,7 @@ public class BinarySearch {
 			System.out.println("Enter element "+(i+1)+" of this sorted list");
 			sortedList[i]=scanner.nextInt();
 		}
-		
+		//asking for keys
 		System.out.println(" How many numbers you are searching for ?");
 		int k=scanner.nextInt();
 		int[] listNumbers=new int[k];
@@ -47,6 +57,7 @@ public class BinarySearch {
 			index[i]=bs.binarySearch(sortedList, listNumbers[i]);
 			
 		}
+		//for loop that displays all the keys and their respective indexes
 		for (int i=0;i<k;i++) {
 			System.out.println("The index of "+listNumbers[i]+" is "+index[i]);
 		}
