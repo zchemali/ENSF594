@@ -5,9 +5,9 @@ public class MoneyChange {
 public static int findMin (int[] storage, int a ,int b, int c) {
 for (int i=0;i<storage.length;i++) {
 	int temp =storage[i];
-	int sub_a=i-a;
-	int sub_b=i-b;
-	int sub_c=i-c;
+	int sub_a=i-a;//i-1
+	int sub_b=i-b;//1-3
+	int sub_c=i-c;//i-4
 
 	int counta=temp,countb=temp,countc=temp;
 	if(sub_a>=0 && (i-a)>=0) {
@@ -25,8 +25,8 @@ for (int i=0;i<storage.length;i++) {
 	
 	int temp_count=Math.min(counta, countb);
 	storage[i]=Math.min(temp_count, countc);
-	System.out.println("a "+counta+"b "+countb+" c "+countc);
-	System.out.println("Min at index " + i+" is "+storage[i]);
+//	System.out.println("a "+counta+"b "+countb+" c "+countc);
+//	System.out.println("Min at index " + i+" is "+storage[i]);
 	
 }
 return storage[storage.length-1];
