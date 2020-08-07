@@ -1,60 +1,19 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import javax.jws.Oneway;
-
+/**
+ * You sort end points ,
+ * then compare the beg points to threshold 
+ * if beg>threshold then appemd end point and threshold =endpoint
+ * repreat until you have reached all segments
+ * @author zchem
+ *
+ */
 public class Signature {
-	// key: first num, length
-	static HashMap<Integer,Integer> test =new HashMap<Integer, Integer>();
-	
-//public static ArrayList<ArrayList> findCommon(ArrayList<ArrayList> data) {
-//	ArrayList<ArrayList> unique= new ArrayList<ArrayList>();
-//		for (int i=0;i<data.size();i++) {
-//			ArrayList<Integer> temp= new ArrayList<Integer>();
-//				temp =data.get(i);
-//			for(int k=0;k<data.size();k++) {
-//				ArrayList<Integer> temp2= new ArrayList<Integer>();
-//				temp2=data.get(k);
-//			if (i!=k) {
-////					System.err.println(temp+"     "+temp2);
-//					unique.add(compare(temp,temp2) );
-//					
-//				
-//				}
-//			
-//				
-//			}
-//			
-//	}
-//		
-//	
-//return unique;	
-//	
-//}
 
-//	public static ArrayList compare(ArrayList<Integer> data1, ArrayList<Integer> data2) {
-//
-//		ArrayList<Integer> temp =new ArrayList<Integer>();
-//		for( int i=0;i<data1.size();i++) {
-//			for(int k=0;k<data2.size();k++) {
-//				if(data1.get(i)==data2.get(k)) {
-//					temp.add(data1.get(i));
-//					if(test.containsKey(data1.get(i))) {
-//						System.err.println(test.get(data1.get(i))+1);
-//						test.put(data1.get(i), test.get(data1.get(i))+1);
-//						
-//					}
-//					else
-//					{
-//						test.put(data1.get(i), 1);
-//					}
-//			}}
-//		}
-//		return temp;
-//	}
+
 	public static void main(String[] args) {
 		ArrayList<Integer> end=new ArrayList<Integer>();
 		ArrayList<Integer> beg=new ArrayList<Integer>();
@@ -77,7 +36,7 @@ public class Signature {
 		end.addAll(segments.values());
 		Collections.sort(beg);
 		Collections.sort(end);
-		System.out.println(end);
+//		System.out.println(end);
 		int compare=beg.get(0)-1;
 		
 		for (int i=0;i<end.size();i++) {
