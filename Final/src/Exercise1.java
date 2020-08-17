@@ -83,6 +83,7 @@ public class Exercise1 {
 		for (int i=0;i<rightArray.length;i++) {
 			rightArray[i]=array[m+1+i];//+1 since the right array starts at m+1
 		}
+		
 //		System.out.println("LEFT"+Arrays.toString(leftArray)+"  Right"+Arrays.toString(rightArray));
 		//compare and merge
 		int i=0,j=0;
