@@ -13,7 +13,7 @@ array
 
 **UML**
 
-![UML_Exercise_1](Final/Ex1.PNG)
+![UML_Exercise_1](Ex1.PNG)
 
 
 ##Exercise 2
@@ -32,4 +32,4 @@ the dynamic array is created by invoking `add(LinkedList ll)` in the DynamicArra
 
 **UML**
 
- 
+ ![UML_Exercise_1](Ex2.PNG)

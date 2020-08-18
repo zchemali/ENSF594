@@ -6,8 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * This class reads a txt file of words and checks all the anagrams contained in
- * this text file, then write the result to an output file
+ *  
  * 
  * @author zchem
  *
